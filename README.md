@@ -145,25 +145,25 @@ docker run hello-world
 
 ## نصب eigenlayer CLI
 
-راحتترین روش استفاده از binary های موجود در گیت هاب خود پروژه اس. ورژن مخصوص Ubuntu رو دانلود میکنیم    
+راحتترین روش استفاده از binary های موجود در گیت هاب خود پروژه اس   
 
 مطمئن بشید در مسیر Home قرار دارید. با این دستور همیشه به مسیر Home کاربری که باهاش لاگین هستید وارد میشیم    
 
 ```shell
 cd ~
 ```
-باینری رو دانلود و بهش اجازه اجرا شدن میدیم   
+باینری رو دانلود میکنیم و برای دسترسی آسان در PATH قرار میدیم   
 ```shell
-curl -L https://github.com/NethermindEth/eigenlayer/releases/download/v0.4.3/eigenlayer-linux-amd64-ubuntu-20-04 --output eigenlayer
-chmod +x ./eigenlayer
+curl -sSfL https://raw.githubusercontent.com/layr-labs/eigenlayer-cli/master/scripts/install.sh | sh -s
+export PATH=$PATH:~/bin
 ```
 
 ## ساخت کلید های ECDSA و BLS
 
 بجای [keyname] نام مورد دلخواه خودتون رو قرار بدید. بعد از اجرای هر کدوم و وارد کردن یه رمز مناسب **حتما از Private key بک آپ بگیرید توی یه جای مطمئن** همونطور که از کلید خصوصی کیف پولتون محافظت میکنید.
 ```shell
-./eigenlayer operator keys create --key-type ecdsa [keyname]
-./eigenlayer operator keys create --key-type bls [keyname]
+eigenlayeroperator keys create --key-type ecdsa [keyname]
+eigenlayeroperator keys create --key-type bls [keyname]
 ```
 
 توصیه میکنم از کل خروجی این دستورات یه بک آپ بگیرید و یجایی ذخیره کنید. همجنین محتوای فایل هایی که در مسیر  Key Location مشخص شده رو با دستور زیر روی صفحه به نمایش در بیارید و هر کدوم رو تو یه فایل رو سیستم خودتون بک آپ بگیرید. در اینجا اسم کلید من arash هست که برای شما میشه نامی که انتخاب کردید   
@@ -193,13 +193,13 @@ cat /home/arash/.eigenlayer/operator_keys/arash.bls.key.json
 ![image](https://github.com/0x4r45h/EigenLayer-node/assets/19164358/246c69b9-6db5-4e79-9478-c6c52d64f9ca)
 
 
-حالا وارد [این لینک](https://github.com/NethermindEth/eigenlayer/blob/develop/cli/operator/config/metadata-example.json) بشید و فایل metadata-example.json رو دانلود کنید و اسمش رو تغییر بدید به metadata.json و محتوای داخلش رو به تغییر بدید. اسم هر چیزی میتونه باشه. بقیه فیلد ها مشخصه. برای لوگو از لینکی که در مرحله قبل بدست آوردیم استفاده کنید. حتما باید لینک به .png ختم بشه وگرنه خطا میده.      
-بعد از ذخیره فایل دوباره به همون روش لوگو، اینبار فایل metadata.json رو آپلود و لینکش رو ذخیره کنید. (اینبار لینک به metadata.json ختم میشه)   
+حالا وارد [این لینک](https://github.com/Layr-Labs/eigenlayer-cli/blob/master/pkg/operator/config/metadata-example.json) بشید و فایل metadata-example.json رو دانلود کنید و اسمش رو تغییر بدید به metadata.json و محتوای داخلش رو به تغییر بدید. اسم هر چیزی میتونه باشه. بقیه فیلد ها مشخصه. برای لوگو از لینکی که در مرحله قبل بدست آوردیم استفاده کنید. حتما باید لینک به .png ختم بشه وگرنه خطا میده.      
+بعد از ذخیره فایل دوباره به همون روش لوگو، اینبار فایل metadata.json رو آپلود و لینکش رو ذخیره کنید. ( لینک به metadata.json ختم میشه)   
 
 
-#### ساخت فایل operator-config.yaml
+#### ساخت فایل operator.yaml
 
-فایل نمونه رو از [این لینک](https://github.com/NethermindEth/eigenlayer/blob/develop/cli/operator/config/operator-config-example.yaml) دانلود کنید
+فایل نمونه رو از [این لینک](https://github.com/Layr-Labs/eigenlayer-cli/blob/master/pkg/operator/config/operator-config-example.yaml) دانلود کنید
 
 
 **مهم! فایل های YAML به space و tab حساس هستند. یه space اضافی میتونه فایل رو خراب کنه. پس در ویرایش این فایل ها دقت کنید و سعی کنید از ادیتور مناسب استفاده کنید**   
@@ -216,7 +216,7 @@ cat /home/arash/.eigenlayer/operator_keys/arash.bls.key.json
 
  داخل سرور با این دستور یه فایل تو ادیتور نانو باز کنید و محتوای ویرایش شده داخلش paste کنید و با فشار دادن Ctrl+X و وارد کردن y و سپس enter ذخیره اش کنید
 ```shell
-nano operator-config.yaml
+nano operator.yaml
 ```
 نمونه فایل من:   
 
@@ -228,12 +228,12 @@ nano operator-config.yaml
 یه مقدار کم اتریوم Goerli به آدرس اپراتور بفرستید و با این دستور درخواست ثبت اپراتور رو ارسال کنید. پسورد هایی که در حین ساخت کلید ها وارد کردید رو الان ازتون میخواد   
 
 ```shell
-./eigenlayer operator register operator-config.yaml
+eigenlayeroperator register operator.yaml
 ```
 با این دستور وضعیت ثبت اپراتور رو بررسی کنید   
 
 ```shell
-./eigenlayer operator status operator-config.yaml
+eigenlayeroperator status operator.yaml
 ```
 
 
@@ -275,7 +275,7 @@ mkdir -p $HOME/.eigenlayer/eigenda/db
 ```
 
 ### درخواست عضویت در EigenDA
-اینجا باید به مقداری TVL گرفته باشید که جز 60 نفر اول باشید وگرنه failed میشه. به هر حال ما میزنیم و فیل شدنمون رو تماشا میکنیم   
+اینجا باید به مقداری TVL گرفته باشید که جز 60 نفر اول باشید وگرنه failed میشه. به هر حال ما میزنیم و fail شدنمون رو تماشا میکنیم   
 
 ```shell
 ./run.sh opt-in
