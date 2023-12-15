@@ -162,8 +162,8 @@ export PATH=$PATH:~/bin
 
 بجای [keyname] نام مورد دلخواه خودتون رو قرار بدید. بعد از اجرای هر کدوم و وارد کردن یه رمز مناسب **حتما از Private key بک آپ بگیرید توی یه جای مطمئن** همونطور که از کلید خصوصی کیف پولتون محافظت میکنید.
 ```shell
-eigenlayeroperator keys create --key-type ecdsa [keyname]
-eigenlayeroperator keys create --key-type bls [keyname]
+eigenlayer operator keys create --key-type ecdsa [keyname]
+eigenlayer operator keys create --key-type bls [keyname]
 ```
 
 توصیه میکنم از کل خروجی این دستورات یه بک آپ بگیرید و یجایی ذخیره کنید. همجنین محتوای فایل هایی که در مسیر  Key Location مشخص شده رو با دستور زیر روی صفحه به نمایش در بیارید و هر کدوم رو تو یه فایل رو سیستم خودتون بک آپ بگیرید. در اینجا اسم کلید من arash هست که برای شما میشه نامی که انتخاب کردید   
@@ -228,12 +228,12 @@ nano operator.yaml
 یه مقدار کم اتریوم Goerli به آدرس اپراتور بفرستید و با این دستور درخواست ثبت اپراتور رو ارسال کنید. پسورد هایی که در حین ساخت کلید ها وارد کردید رو الان ازتون میخواد   
 
 ```shell
-eigenlayeroperator register operator.yaml
+eigenlayer operator register operator.yaml
 ```
 با این دستور وضعیت ثبت اپراتور رو بررسی کنید   
 
 ```shell
-eigenlayeroperator status operator.yaml
+eigenlayer operator status operator.yaml
 ```
 
 
