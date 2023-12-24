@@ -169,6 +169,10 @@ cd ~
 curl -sSfL https://raw.githubusercontent.com/layr-labs/eigenlayer-cli/master/scripts/install.sh | sh -s
 export PATH=$PATH:~/bin
 ```
+بهتره این دستور رو هم وارد کنید که هر بار از سرور خارج میشید دوباره مجبور نشید CLI رو به PATH اضافه کنید.   
+```shell
+echo 'export PATH=$PATH:~/bin' >> ~/.bashrc && source ~/.bashrc
+```
 
 ## ساخت کلید های ECDSA و BLS
 
