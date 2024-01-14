@@ -1,4 +1,40 @@
-# آپگرید از ورژن v0.1.3 به ورژن v0.2.0
+# راهنمای آپگرید
+این بخش برای کسانی هست که قبلا با این اسکریپت نود ران کردن و میخوان به ورژن های جدید آپگرید کنن. اگر اولین بار هست که میخواید از این راهنما استفاده کنید به بخش  راه اندازی نود Eigen Layer برید
+
+## آپگرید از ورژن v0.2.0 به ورژن v0.2.1
+
+ابتدا باینری اصلی رو با این دستور به آخرین ورژن آپدیت کنید
+```shell
+curl -sSfL https://raw.githubusercontent.com/layr-labs/eigenlayer-cli/master/scripts/install.sh | sh -s
+```
+ورژن رو چک کنید مطمئن باشید که از ورژن v0.5.1 یا بالاتر استفاده میکنید
+```shell
+eigenlayer  -v
+```
+دستورات زیر رو به ترتیب اجرا کنید
+```shell
+cd ~/eigenda-operator-setup
+cp .env .env.bak
+git reset --hard
+git pull
+mv .env.bak .env
+```
+فایل .env رو با nano باز کنید و ورژن ایمیج خط اول( MAIN_SERVICE_IMAGE) رو به 0.2.1 تغییر بدید.کافیه برید انتهای خط اول، اخرین صفر رو پاک کنید و بچاش ۱ بزارید
+```shell
+nano .env
+```
+یعنی این خط:   
+`MAIN_SERVICE_IMAGE=ghcr.io/layr-labs/eigenda/opr-node:release-0.2.0`   
+باید تبدیل شه به:      
+`MAIN_SERVICE_IMAGE=ghcr.io/layr-labs/eigenda/opr-node:release-0.2.1`   
+ذخیره کنید و ادامه دستورات :   
+```shell
+docker compose pull
+docker compose down
+docker compose up -d
+```
+
+## آپگرید از ورژن v0.1.3 به ورژن v0.2.0
 اگر قبل از ۲۱ دسامبر نود راه اندازی کردید باید به ورژن جدید آپگرید کنید. برای اینکار به سرور SSH بزنید و دستورات زیر رو اجرا کنید
 
 ```shell
@@ -10,6 +46,8 @@ docker compose down
 git stash pop
 docker compose up -d
 ```
+---
+
 # راه اندازی نود Eigen Layer
 قبل از هر چیزی میخوام بگم تو این آموزش یکم سعی میکنیم یکم Best parctice هارو رعابت کنیم. اکثر آموزش های راه اندازی نود که پیدا میشه با کاربر root انجام میشه که فوق العاده کار خطرناکیه. همچنین به استفاده از SSH بجای پسورد برای ورود به سرور هم می‌پردازیم.   
 
@@ -269,6 +307,10 @@ cd ~
 git clone https://github.com/Layr-Labs/eigenda-operator-setup.git
 
 cd eigenda-operator-setup
+```
+از فایل env.example. یه کپی بگیرید
+```bash
+cp .env.example .env
 ```
 فایل env. رو با nano باز کنید و فیلدهای زیر رو با مقادیر خودتون آپدیت کنید
 ```shell
