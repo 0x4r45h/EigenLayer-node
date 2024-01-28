@@ -1,6 +1,32 @@
 # راهنمای آپگرید
 این بخش برای کسانی هست که قبلا با این اسکریپت نود ران کردن و میخوان به ورژن های جدید آپگرید کنن. اگر اولین بار هست که میخواید از این راهنما استفاده کنید به بخش  راه اندازی نود Eigen Layer برید
 
+
+
+
+## آپگرید از ورژن v0.2.1 به ورژن v0.2.3
+
+دستورات زیر رو به ترتیب اجرا کنید
+```shell
+cd ~/eigenda-operator-setup
+git pull
+```
+فایل .env رو با nano باز کنید و ورژن ایمیج خط اول( MAIN_SERVICE_IMAGE) رو به 0.2.3 تغییر بدید.
+```shell
+nano .env
+```
+یعنی این خط:   
+`MAIN_SERVICE_IMAGE=ghcr.io/layr-labs/eigenda/opr-node:release-0.2.1`   
+باید تبدیل شه به:      
+`MAIN_SERVICE_IMAGE=ghcr.io/layr-labs/eigenda/opr-node:release-0.2.3`   
+همچنین خط زیر رو به انتهای فایل بعد از آخرین خط اضافه کنید   
+`NODE_API_PORT=9091`
+ذخیره کنید و ادامه دستورات :   
+```shell
+docker compose pull
+docker compose down
+docker compose up -d
+```
 ## آپگرید از ورژن v0.2.0 به ورژن v0.2.1
 
 ابتدا باینری اصلی رو با این دستور به آخرین ورژن آپدیت کنید
