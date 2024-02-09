@@ -2,6 +2,40 @@
 این بخش برای کسانی هست که قبلا با این اسکریپت نود ران کردن و میخوان به ورژن های جدید آپگرید کنن. اگر اولین بار هست که میخواید از این راهنما استفاده کنید به بخش  راه اندازی نود Eigen Layer برید
 
 
+## آپگرید از ورژن v0.2.3 به ورژن v3.0.0
+
+ابتدا باینری اصلی رو با این دستور به آخرین ورژن آپدیت کنید
+```shell
+curl -sSfL https://raw.githubusercontent.com/layr-labs/eigenlayer-cli/master/scripts/install.sh | sh -s
+```
+ورژن رو چک کنید مطمئن باشید که از ورژن v0.6.0 یا بالاتر استفاده میکنید
+```shell
+eigenlayer  -v
+```
+دستورات زیر رو به ترتیب اجرا کنید
+```shell
+cd ~/eigenda-operator-setup
+git pull
+```
+فایل .env رو با nano باز کنید و تغییرات زیر رو اعمال کنید:
+
+- Update `MAIN_SERVICE_IMAGE=ghcr.io/layr-labs/eigenda/opr-node:release-0.3.0`
+- Update `NODE_SRS_ORDER=268435456`
+- Add `NODE_SRS_LOAD=131072`
+- Remove Line `NODE_G2_PATH`
+- Add `NODE_G2_POWER_OF_2_PATH=/app/g2.point.powerOf2`
+- Update `NODE_EIGENDA_SERVICE_MANAGER=0xa3b1689Ab85409B15e07d2ED50A6EA9905074Ee5`
+- Update `NODE_BLS_OPERATOR_STATE_RETRIVER=0x357a99ccF04fC68Bd8d220263F9182506CBFEaF8`
+- Update `NODE_G2_PATH_HOST=${USER_HOME}/eigenda-operator-setup/resources/g2.point.powerOf2`
+
+ذخیره کنید و ادامه دستورات :   
+```shell
+docker compose pull
+docker compose down
+./run.sh opt-in
+docker compose up -d
+```
+
 
 
 ## آپگرید از ورژن v0.2.1 به ورژن v0.2.3
